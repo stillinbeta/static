@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Draw a thing!</title>
+        <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="canvas.js"></script>
+        <script type="text/javascript" src="shapes.js"></script>
+        <!-- http://jscolor.com/ -->
+        <script type="text/javascript" src="jscolor/jscolor.js"></script>
+        <link rel="stylesheet" type="text/css" href="canvas.css" />
+    </head>
+    <body>
+        <nav>
+            <div class="button" id="random">Random</div>
+            <div class="button" id="clear">Clear</div>
+            <div class="button" id="delete">Delete shape</div>
+            <div class="button" id="duplicate">Duplicate</div> <br />
+            <div class="button selected" id="select">Select</div>
+            <div class="button" id="rectangle">Rectangle</div>
+            <div class="button" id="triangle">Triangle</div>
+            <div class="button" id="line">Line</div>
+           <br />
+            <div class="button stroke">
+                <input type="range" id="stroke-width" max="6" min="1" value="1"/> <br />
+                <label for="stroke-width">Line thickness</label>
+            </div>
+            <div class="button stroke">
+                <input type="text" class="color" id="bg-color" value="ffffff"/> <br />
+                <label for="stroke-width">Fill colour</label>
+            </div>
+            <div class="button stroke">
+                <input type="text" class="color" id="fg-color" value="000000"/> <br />
+                <label for="stroke-width">Line colour</label>
+            </div>
+        </nav>
+        <div id="canvas-layers">
+            <canvas id="active" height="500" width="500"></canvas>
+            <canvas id="stack" height="500" width="500"></canvas>
+            <div id="tip">Create a new shape, use the menu on the left</div>
+        </div>
+    </body>
+</html>

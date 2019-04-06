@@ -1,0 +1,69 @@
+body {
+    background: #4A587F;
+}
+
+#canvas-layers canvas {
+    position: absolute;
+    top: 0;
+    left: 130px;
+    border-width: 0px 2px 2px 2px;
+    border-style: solid;
+    border-color: #4777FF;
+}
+
+#canvas-layers #active {
+    z-index: 2;
+}
+#canvas-layers #stack {
+    z-index: 1;
+    background: url('bg.png');
+}
+#canvas-layers #tip {
+    position: absolute;
+    top: 510px;
+    left: 130px;
+    text-align: center;
+    width: 500px;
+    color: #93B0FF;
+    font-style: italic;
+}
+
+nav {
+    height: 100%;
+}
+
+nav .button {
+    cursor: pointer;
+    width: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-align: center;
+    /*border: 2px solid #4777FF;*/
+    color: #93B0FF;
+    background: #233C7F;
+    border-radius: 10px;
+}
+
+.button:hover, .button.selected {
+    background-color: #385FCC;
+}
+
+nav .button .stroke {
+    cursor: default;
+}
+
+nav .button:hover .stroke {
+    background: #233C7F;
+}
+
+nav .stroke input{
+    width: 80px;
+}
+
+nav .stroke label {
+    font-size: 10pt;
+    color: #93B0FF;
+}
+
+
+

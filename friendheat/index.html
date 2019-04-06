@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Client-side Authentication Example</title>
+    <script src="//static.stillinbeta.com/friendheat/jquery.js"></script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      var GEOCODE_API = 'http://maps.googleapis.com/maps/api/geocode/json?'
+
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+
+      // Init the SDK upon load
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '253727158063193', // App ID
+          channelUrl : '//'+window.location.hostname+'/friendheat/channel.html', // Path to your Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : false  // parse XFBML
+        });
+
+        var request_count = 0;
+        function debug_friends(friends, data_so_far) {
+            if (! friends.data) {
+                console.debug('test')
+            }
+            jQuery.each(friends.data, function(index, friend) {
+                if (friend.location) {
+                    if (data_so_far[friend.location]) {
+                        data_so_far[friend.location].count += 1
+                    } else {
+                        data_so_far[friend.location] = {'count': 1}
+                        request_count++;
+                        $.getJSON(GEOCODE_API + $.param({'sensor': true, 'address': friend.location})
+                        .done(function(
+                        
+                        
+                    
+                }
+                $("#json").append($('<li />').html(text));
+                //.append($('<img />').attr('src', friend.picture.data.url))
+            })
+
+            if (friends.paging.next) {
+                FB.api(friends.paging.next, function(friends) {debug_friends(friends, {})});
+            }
+        }
+        // listen for and handle auth.statusChange events
+        FB.Event.subscribe('auth.statusChange', function(response) {
+          if (response.authResponse) {
+            // user has auth'd your app and is logged into Facebook
+            FB.api('/me/friends?fields=name,location', debug_friends)
+            document.getElementById('auth-loggedout').style.display = 'none';
+            document.getElementById('auth-loggedin').style.display = 'block';
+          } else {
+            // user has not auth'd your app, or is not logged into Facebook
+            document.getElementById('auth-loggedout').style.display = 'block';
+            document.getElementById('auth-loggedin').style.display = 'none';
+          }
+        });
+
+        // respond to clicks on the login and logout links
+        document.getElementById('auth-loginlink').addEventListener('click', function(){
+          FB.login(null, {'scope':'friends_location'});
+        });
+        document.getElementById('auth-logoutlink').addEventListener('click', function(){
+          FB.logout();
+        }); 
+      } 
+    </script>
+
+    <h1>Facebook Client-side Authentication Example</h1>
+      <div id="auth-status">
+        <div id="auth-loggedout">
+          <a href="#" id="auth-loginlink">Login</a>
+        </div>
+        <div id="auth-loggedin" style="display:none">
+            <ul id="json"></ul>
+        (<a href="#" id="auth-logoutlink">logout</a>)
+      </div>
+    </div>
+
+  </body>
+</html>
