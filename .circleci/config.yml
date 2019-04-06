@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  push:
+    docker:
+    - image: circleci/golang
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run: docker build . -t static
+      - run:
+          name: docker push
+          command: |
+            TIME=$(date +%s)
+            docker tag static stillinbeta/static-files:$TIME
+            docker tag static stillinbeta/static-files:latest
+            docker push stillinbeta/static-files:$TIME
+            docker push stillinbeta/static-files:latest
+workflows:
+  version: 2
+  build:
+    jobs:
+      - push
