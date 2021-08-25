@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Envelope","Envelope represents an cryptothaumaticly encrypted message"],["Message","Message represents an unencrypted message of cryptothaumatic origin or destination"],["ThaumCrypto","ThaumCrypto is a wrapper struct, representing a SITA or other Thaumatic device ready to perform thaumocryptography"]]});
